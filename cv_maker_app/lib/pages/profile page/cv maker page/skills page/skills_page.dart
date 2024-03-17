@@ -26,6 +26,11 @@ class _SkillsPageState extends State<SkillsPage> {
     final bloc = context.read<CvBloc>();
     TextEditingController skillController = TextEditingController();
     TextEditingController objectiveController = TextEditingController();
+    if (locator.userCv.fullName != "") {
+      final userCv = locator.userCv;
+      skillController.text = userCv.skills;
+      objectiveController.text = userCv.objective;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: firstColor,
@@ -95,8 +100,13 @@ class _SkillsPageState extends State<SkillsPage> {
           if (_formKey.currentState!.validate()) {
             locator.skills = skillController.text;
             locator.objective = objectiveController.text;
-            bloc.add(AddCvEvent());
-            context.pushTo(view: const ProfilePage());
+            if (locator.userCv.fullName != "") {
+              bloc.add(EditCvEvent());
+              context.pushTo(view: const ProfilePage());
+            } else {
+              bloc.add(AddCvEvent());
+              context.pushTo(view: const ProfilePage());
+            }
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Please fill the data')),

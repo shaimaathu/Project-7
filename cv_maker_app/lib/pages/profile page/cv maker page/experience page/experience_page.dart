@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cv_maker_app/data/data_layer.dart';
 import 'package:cv_maker_app/data/model/experience_model.dart';
 import 'package:cv_maker_app/helper/colors.dart';
@@ -35,6 +37,19 @@ class _ExperienceState extends State<Experience> {
 
   @override
   Widget build(BuildContext context) {
+    if (locator.userCv.fullName != "") {
+      final userCv = locator.userCv;
+      ExperienceModel userExperience = ExperienceModel(
+          company: "", endDate: "", position: "", startDate: "");
+      if (userCv.experience!.isNotEmpty) {
+        userExperience =
+            ExperienceModel.fromJson(jsonDecode(userCv.experience!));
+        nameController.text = userExperience.company;
+        jobTitleController.text = userExperience.position;
+        startJobDateController.text = userExperience.startDate;
+        endDateJobController.text = userExperience.endDate;
+      }
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: firstColor,
@@ -83,39 +98,38 @@ class _ExperienceState extends State<Experience> {
                 ],
               ),
             ),
-            
           ],
         ),
       ),
       bottomNavigationBar: CVButtonWidget(
-              title: 'save',
-              onPress: () {
-                // if (locator.educationList.isNotEmpty) {
-                if (nameController.text != "" &&
-                    jobTitleController.text != "" &&
-                    startJobDateController.text != "" &&
-                    endDateJobController.text != "") {
-                  locator.experienceList.add(
-                    ExperienceModel(
-                      company: nameController.text,
-                      position: jobTitleController.text,
-                      endDate: endDateJobController.text,
-                      startDate: startJobDateController.text,
-                    ),
-                  );
-                  print("added ${locator.experienceList.length}");
-                } else {
-                  // context.pushTo(view: )
-                }
-                // } else {
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     const SnackBar(
-                //         content:
-                //             Text('Please enter at least one education entry')),
-                //   );
-                // }
-              },
-            ),
+        title: 'save',
+        onPress: () {
+          // if (locator.educationList.isNotEmpty) {
+          if (nameController.text != "" &&
+              jobTitleController.text != "" &&
+              startJobDateController.text != "" &&
+              endDateJobController.text != "") {
+            locator.experienceList.add(
+              ExperienceModel(
+                company: nameController.text,
+                position: jobTitleController.text,
+                endDate: endDateJobController.text,
+                startDate: startJobDateController.text,
+              ),
+            );
+            print("added ${locator.experienceList.length}");
+          } else {
+            // context.pushTo(view: )
+          }
+          // } else {
+          //   ScaffoldMessenger.of(context).showSnackBar(
+          //     const SnackBar(
+          //         content:
+          //             Text('Please enter at least one education entry')),
+          //   );
+          // }
+        },
+      ),
     );
   }
 }

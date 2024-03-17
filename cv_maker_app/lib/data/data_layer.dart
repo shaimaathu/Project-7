@@ -14,17 +14,37 @@ class AllData {
   String dateOfBirth = '';
   String skills = '';
   String objective = '';
-  late CVModel userCv;
-  List<EducationModel> educationList = []; // List to store education entries
-  List<ExperienceModel> experienceList = []; // List to store education entries
+  CVModel userCv = CVModel(
+      address: "",
+      dateOfBirth: "",
+      education: "",
+      email: "",
+      fullName: "",
+      id: "",
+      objective: "",
+      phoneNumber: "",
+      skills: "",
+      userId: "",
+      experience: "",
+      image: "");
+  List<EducationModel> educationList = []; 
+  List<ExperienceModel> experienceList = []; 
 
   AllData() {
     getToken();
+    getId();
   }
 
   addToken() async {
     if (token.isNotEmpty) {
       await box.write("token", token);
+    }
+    box.save();
+  }
+
+  addId() async {
+    if (id.isNotEmpty) {
+      await box.write("Id", id);
     }
     box.save();
   }
@@ -37,8 +57,17 @@ class AllData {
     }
   }
 
+  getId() {
+    if (box.hasData("Id")) {
+      if (token.isEmpty) {
+        id = box.read("Id");
+      }
+    }
+  }
+
   signOut() {
     token = '';
+    id = '';
     name = '';
     email = '';
     phone = '';
@@ -46,7 +75,7 @@ class AllData {
     dateOfBirth = '';
     skills = '';
     objective = '';
-    educationList = []; // List to store education entries
+    educationList = []; 
     experienceList = [];
     token = '';
     box.remove("token");
@@ -61,7 +90,7 @@ class AllData {
     dateOfBirth = '';
     skills = '';
     objective = '';
-    educationList = []; // List to store education entries
+    educationList = []; 
     experienceList = [];
   }
 }

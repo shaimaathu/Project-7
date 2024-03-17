@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cv_maker_app/data/data_layer.dart';
 import 'package:cv_maker_app/data/model/education_model.dart';
 import 'package:cv_maker_app/helper/colors.dart';
@@ -37,6 +39,16 @@ class _EducationState extends State<Education> {
 
   @override
   Widget build(BuildContext context) {
+    if (locator.userCv.fullName != "") {
+      final userCv = locator.userCv;
+      EducationModel userEducation =
+          EducationModel.fromJson(jsonDecode(userCv.education));
+      universityController.text = userEducation.universityName;
+      degreeController.text = userEducation.degree;
+      majorController.text = userEducation.specialization;
+      startDateController.text = userEducation.startDate;
+      endDateController.text = userEducation.endDate;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: firstColor,

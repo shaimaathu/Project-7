@@ -73,11 +73,11 @@ class Database {
     locator.token = supabase.auth.currentSession!.accessToken;
     locator.id = supabase.auth.currentSession!.user.id;
     locator.addToken();
+    locator.addId();
   }
 
   Future signout() async {
     await supabase.auth.signOut();
-    locator.id = '';
     locator.signOut();
   }
 
@@ -104,7 +104,7 @@ class Database {
     });
   }
 
-  Future editCv({required id}) async {
+  Future editCv() async {
     await supabase
         .from('notes')
         .update({
@@ -120,7 +120,7 @@ class Database {
       "userId": locator.id,
       "date_of_birth": locator.dateOfBirth,
       "image": ""
-        }).match({'id': id});
+        }).match({'userId': locator.id});
   }
 
   Future deleteCv({required id}) async {

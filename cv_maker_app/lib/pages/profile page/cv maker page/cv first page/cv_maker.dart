@@ -13,7 +13,6 @@ import '../education page/education_page.dart';
 class CvMaker extends StatelessWidget {
   CvMaker({super.key});
   final locator = GetIt.I.get<AllData>();
-
   @override
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
@@ -21,6 +20,14 @@ class CvMaker extends StatelessWidget {
     TextEditingController phoneController = TextEditingController();
     TextEditingController addressController = TextEditingController();
     TextEditingController dateOfBirthController = TextEditingController();
+    if (locator.userCv.fullName != "") {
+      final userCv = locator.userCv;
+       nameController.text = userCv.fullName;
+      emailController.text = userCv.email;
+      phoneController.text = userCv.phoneNumber;
+      addressController.text = userCv.address;
+      dateOfBirthController.text = userCv.dateOfBirth;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: firstColor,

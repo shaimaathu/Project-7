@@ -18,8 +18,21 @@ class CvBloc extends Bloc<CvEvent, CvState> {
     on<FetchUserCvEvent>(fetchUserCvs);
     on<DeleteCvEvent>(deleteCv);
     on<AddCvEvent>(addCv);
-    // on<EditNotesEvent>(editNots);
+    on<EditCvEvent>(editCv);
   }
+
+  FutureOr<void> editCv(EditCvEvent event, Emitter<CvState> emit) async {
+    try {
+      emit(LaudingState());
+      final serviceLocator = Database();
+      serviceLocator.editCv();
+      List<CVModel> userCv = await serviceLocator.fetchUserCv();
+      emit(DisplayUserCvsState(cvs: userCv));
+    } catch (error) {
+      emit(ErrorState());
+    }
+  }
+
   FutureOr<void> addCv(AddCvEvent event, Emitter<CvState> emit) async {
     try {
       emit(LaudingState());
@@ -69,17 +82,4 @@ class CvBloc extends Bloc<CvEvent, CvState> {
       emit(ErrorState());
     }
   }
-
-  // FutureOr<void> editNots(
-  //     EditNotesEvent event, Emitter<ProfileState> emit) async {
-  //   try {
-  //     final serviceLocator = Database();
-  //     serviceLocator.editNote(
-  //         content: event.content, userId: event.userId, id: event.id);
-  //     emit(DisplayUserNotesState(
-  //         notes: await serviceLocator.fetchUserNots(id: event.userId)));
-  //   } catch (error) {
-  //     emit(ErrorState());
-  //   }
-  // }
 }
