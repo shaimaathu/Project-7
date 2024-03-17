@@ -1,0 +1,30 @@
+name: cv_maker_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.0-99.1.beta <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.4
+  flutter_dotenv: ^5.1.0
+  flutter_svg: ^2.0.10+1
+  get_it: ^7.6.7
+  get_storage: ^2.1.1
+  image_picker: ^1.0.7
+  supabase_flutter: ^2.3.4
+  auto_size_text: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
+    - assets/
