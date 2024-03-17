@@ -5,6 +5,7 @@ import 'package:cv_maker_app/data/model/experience_model.dart';
 import 'package:cv_maker_app/helper/colors.dart';
 import 'package:cv_maker_app/helper/extintion.dart';
 import 'package:cv_maker_app/pages/profile%20page/cv%20maker%20page/experience%20page/widgets/experience_data.dart';
+import 'package:cv_maker_app/pages/profile%20page/cv%20maker%20page/skills%20page/skills_page.dart';
 import 'package:cv_maker_app/pages/profile%20page/cv%20maker%20page/widgets/cv_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -118,8 +119,9 @@ class _ExperienceState extends State<Experience> {
               ),
             );
             print("added ${locator.experienceList.length}");
+            context.pushTo(view: const SkillsPage());
           } else {
-            // context.pushTo(view: )
+            context.pushTo(view: const SkillsPage());
           }
           // } else {
           //   ScaffoldMessenger.of(context).showSnackBar(

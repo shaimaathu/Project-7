@@ -54,6 +54,7 @@ class SignIn extends StatelessWidget {
               builder: (context, state) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const ImageView(),
                     gapH30,

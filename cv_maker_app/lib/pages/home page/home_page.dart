@@ -61,6 +61,9 @@ class HomePage extends StatelessWidget {
               if (state is DisplayAllCvsState) {
                 Navigator.pop(context);
               }
+              if (state is ErrorState) {
+                Navigator.pop(context);
+              }
             },
             builder: (context, state) {
               if (state is DisplayAllCvsState) {

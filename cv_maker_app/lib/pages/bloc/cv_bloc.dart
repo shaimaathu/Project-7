@@ -61,7 +61,7 @@ class CvBloc extends Bloc<CvEvent, CvState> {
       emit(LaudingState());
       print("idddddd-------------------");
       final serviceLocator = Database();
-      await serviceLocator.getUserByToken();
+      // await serviceLocator.getUserByToken();
       print("id");
       List<CVModel> userCv = await serviceLocator.fetchUserCv() ?? [];
       print("${userCv.length}");

@@ -21,7 +21,6 @@ class Database {
   Future fetchUserCv() async {
     print(" in the fetch by ${locator.id}");
     print(" in the fetch by ${locator.token}");
-
     final cvData = await supabase
         .from('cv_data')
         .select('*')
@@ -81,12 +80,12 @@ class Database {
     locator.signOut();
   }
 
-  Future getUserByToken() async {
-    final userResponse = await supabase.auth.getUser(locator.token);
-    locator.id = userResponse.user!.id;
-    return userResponse.user!.id;
-  }
-  
+  // Future getUserByToken() async {
+  //   final userResponse = await supabase.auth.getUser(locator.token);
+  //   locator.id = userResponse.user!.id;
+  //   return userResponse.user!.id;
+  // }
+
   Future addCV() async {
     await supabase.from('cv_data').insert({
       "full_name": locator.name,
@@ -105,9 +104,7 @@ class Database {
   }
 
   Future editCv() async {
-    await supabase
-        .from('notes')
-        .update({
+    await supabase.from('notes').update({
       "full_name": locator.name,
       "email": locator.email,
       "phone_number": locator.phone,
@@ -120,7 +117,7 @@ class Database {
       "userId": locator.id,
       "date_of_birth": locator.dateOfBirth,
       "image": ""
-        }).match({'userId': locator.id});
+    }).match({'userId': locator.id});
   }
 
   Future deleteCv({required id}) async {

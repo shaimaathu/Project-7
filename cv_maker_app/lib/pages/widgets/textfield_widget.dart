@@ -35,7 +35,9 @@ class Textfield extends StatelessWidget {
         obscureText: pass,
         enableSuggestions: false,
         decoration: InputDecoration(
-            hintText: hintText, enabledBorder: InputBorder.none),
+            hintText: hintText, 
+            enabledBorder: InputBorder.none,
+            ),
         validator: (String? value) {
           if (value == null || value.isEmpty) {
             return 'Please enter some text';
