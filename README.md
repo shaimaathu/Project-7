@@ -18,9 +18,11 @@ he can log in if he already has an account,
 present all user's Rusumes If he presses them he can see the whole CV of the user:
 
 home page with data:
+
 <img width="342" alt="Screenshot 2024-03-17 at 10 33 04 AM" src="https://github.com/shaimaathu/Project-7/assets/155615972/b4bf028b-6c67-45ea-ab94-3a0acc58717c">
 
 home page without any data:
+
 <img width="349" alt="Screenshot 2024-03-17 at 10 41 32 AM" src="https://github.com/shaimaathu/Project-7/assets/155615972/f18eedf2-fda2-4d90-9878-4000bd191276">
 
 ## profile page:
